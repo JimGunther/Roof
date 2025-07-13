@@ -1,5 +1,5 @@
 /*************************************************************************************
-* NewRoof2.ino: MiS Roof ESP32 Code (Weather Station) 2nd PRODUCTION VERSION         *
+* Roof.ino: MiS Roof ESP32 Code (Weather Station) 2nd PRODUCTION VERSION             *
 *                                                                                    *
 * Version: 0.2                                                                       *
 * Last updated: 29/06/2025 17:35                                                     *
