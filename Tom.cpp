@@ -100,10 +100,13 @@ int Tom::makeValsCSV(char *valsBuf) {
   valsBuf[0] = '$';
   int ixt = nameToI("Tp"); // temperature
   int ixh = nameToI("Hm"); // humidity
+  bool bAllZero = true;
   items[ixh].setValue(items[ixt].getValue2()); // get humidity from temperature Meteo object
   for (i = 0; i < NumItems; i++) {
+    if (items[i].getValue() > 0) bAllZero = false;
     x += items[i].makeCSV(valsBuf + x);
   }
+  if (bAllZero) return 0;
   return x;
 }
 

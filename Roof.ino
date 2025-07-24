@@ -1,8 +1,8 @@
 /*************************************************************************************
-* Roof.ino: MiS Roof ESP32 Code (Weather Station) 2nd PRODUCTION VERSION             *
+* Roof.ino: MiS Roof ESP32 Code (Weather Station) 2nd PRODUCTION VERSION         *
 *                                                                                    *
-* Version: 0.2                                                                       *
-* Last updated: 29/06/2025 17:35                                                     *
+* Version: 2.0                                                                       *
+* Last updated: 23/076/2025 16:30                                                     *
 * Author: Jim Gunther                                                                *
 *                                                                                    *
 *                                                                                    *
@@ -134,9 +134,6 @@ parameters:
 returns: void
 *********************************************************************************************************************/
 void publishMQTT(const char* topic, const char* txt) {
-  //char buf[WDBUF_LEN];  // WDBUF_LEN is currently > BUF_LEN, so use bigger buffer: CHANGE IF NO LONGER TRUE!
-  //buf[0] = '$';
-  //strcpy(buf + 1, txt);
   qtClient.publish(topic, txt, false);
 }
 
@@ -308,7 +305,7 @@ void setup() {
   int hrTime = 0; // default to 00:00 if no RPi
 
   qtClient.subscribe(TOPIC_SETUP, 1);
-  loopCount = 0;
+  loopCount = 1;  // changed from 0 to suppress 0,0,... first entry
   hrTime = requestRptInterval();
   rebootTime = millis() + 1000 * 3600 * (24 - hrTime); // milliseconds
 
@@ -484,8 +481,14 @@ void publishToShed() {
   char valsCSV[VALSBUF_LEN];
   char wdCSV[WDBUF_LEN];
   int numWDs = cabinBoy.makeWDCSV(wdCSV);
-  publishMQTT("nws/wd", wdCSV);
   int msgLength = cabinBoy.makeValsCSV(valsCSV);
-  publishMQTT("nws/vals", valsCSV);
+  // msgLength == 0 if all entries are zero
+  if (msgLength > 0){
+    publishMQTT("nws/wd", wdCSV);
+    publishMQTT("nws/vals", valsCSV);
+  }
+  else {
+    Serial.println("All Zeros");
+  }
   cabinBoy.resetAll();
 }
