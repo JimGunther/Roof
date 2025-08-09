@@ -1,8 +1,8 @@
 /*************************************************************************************
-* Roof.ino: MiS Roof ESP32 Code (Weather Station) 2nd PRODUCTION VERSION         *
+* Roof.ino: MiS Roof ESP32 Code (Weather Station) 2nd PRODUCTION VERSION w/o Meteo   *
 *                                                                                    *
-* Version: 2.0                                                                       *
-* Last updated: 23/076/2025 16:30                                                     *
+* Version: 2.5                                                                       *
+* Last updated: 07/08/2025 21:12                                                     *
 * Author: Jim Gunther                                                                *
 *                                                                                    *
 *                                                                                    *
@@ -36,7 +36,6 @@ library BH1750 at version 1.3.0
 #include "Config.h"
 #include "Komms.h"
 #include "Tom.h"
-//#include "Meteo.h"
 
 // Class instantiation
 WebServer server(80);  // OTA
@@ -464,8 +463,8 @@ parameters: none
 returns: void
 ************************************************************************************************************/
 void blink() {
-  Meteo m = cabinBoy.getMeteo("Lt");
-  if (m.getValue() > MIN_DAYLIGHT) {             // daytime
+  int val = cabinBoy.getLight4Blink();
+  if (val > MIN_DAYLIGHT) {             // daytime
     digitalWrite(LEDPin, !digitalRead(LEDPin));  // blink
   } else {                                       // nighttime
     digitalWrite(LEDPin, LOW);

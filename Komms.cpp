@@ -5,8 +5,8 @@
 **************************************************************************
 * Komms.cpp: Komms class: handles all Wifi and MQTT comms                *
 *                                                                        *
-* Version: 0.1                                                           *
-* Last updated: 20/06/2025 16:27                                         *
+* Version: 2.5                                                           *
+* Last updated: 07/08/2025 21:14                                         *
 * Author: Jim Gunther                                                    *
 *                                                                        * 
 *                                                                        *

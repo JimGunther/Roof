@@ -7,7 +7,7 @@
 /***********************************************************************************************
 * Komms.h: header file for Komms class                                                         *
 *                                                                                              *
-* Version: 0.1                                                                                 *
+* Version: 2.5                                                                                 *
 * Last updated: 20/06/2025 16:26                                                               *
 * Author: Jim Gunther                                                                          *
 *                                                                                              *
